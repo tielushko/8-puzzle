@@ -23,6 +23,13 @@ State::State(const State& copy) {
     currentState = copy.currentState;
 } //copy constructor
 
+State& State::operator=(const State& assignedTo) {
+    rowCol = assignedTo.rowCol;
+    currentState = assignedTo.currentState;
+
+    return *this;
+}
+
 void State::printCurrentState() {
     for (int i = 0; i < currentState.size(); i++) {
         if(i % 3 == 0) 
@@ -39,4 +46,29 @@ int State::getEmptyIndex() const{
     }
     return -1; //if the index was not found, then return -1
 }
+
+
+//graph class implementation
+
+Graph::Graph() { 
+    graph.insert(std::make_pair(0, std::vector<int>{1,3}));
+    graph.insert(std::make_pair(1, std::vector<int>{0,2,4}));
+    graph.insert(std::make_pair(2, std::vector<int>{1,5}));
+    graph.insert(std::make_pair(3, std::vector<int>{0,4,6}));
+    graph.insert(std::make_pair(4, std::vector<int>{1,3,5,7}));
+    graph.insert(std::make_pair(5, std::vector<int>{2,4,8}));
+    graph.insert(std::make_pair(6, std::vector<int>{3,7}));
+    graph.insert(std::make_pair(7, std::vector<int>{4,6,8}));
+    graph.insert(std::make_pair(8, std::vector<int>{5,7}));
+}
+
+const std::vector<int>& Graph::getNeighbors(int index) const {
+    if (index < ((ROW_COL_COUNT/ROW_COL_COUNT) - 1) || index > ((ROW_COL_COUNT*ROW_COL_COUNT)-1)) //out of bounds.
+        throw "Incorrect index chosen for neighbors";
+    
+    Map::const_iterator iter = graph.find(index);
+
+    return iter->second;
+}
+
 
