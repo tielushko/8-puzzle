@@ -16,7 +16,8 @@ int main() {
     State state(ROW_COL_COUNT, array);
 
     std::shared_ptr<Node> node;
-    Node()
+
+    //Node somenode = Node(state, node, 0); 
     /*
     for (int i = 0; i < test.size(); i++) {
         if(i % 3 == 0) 

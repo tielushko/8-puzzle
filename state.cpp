@@ -50,16 +50,16 @@ int State::getEmptyIndex() const{
 
 //graph class implementation
 
-Graph::Graph() { 
+Graph::Graph() { //valuing the priority in which the left up right bottom is implemented
     graph.insert(std::make_pair(0, std::vector<int>{1,3}));
     graph.insert(std::make_pair(1, std::vector<int>{0,2,4}));
     graph.insert(std::make_pair(2, std::vector<int>{1,5}));
     graph.insert(std::make_pair(3, std::vector<int>{0,4,6}));
-    graph.insert(std::make_pair(4, std::vector<int>{1,3,5,7}));
-    graph.insert(std::make_pair(5, std::vector<int>{2,4,8}));
+    graph.insert(std::make_pair(4, std::vector<int>{3,1,5,7}));
+    graph.insert(std::make_pair(5, std::vector<int>{4,2,8}));
     graph.insert(std::make_pair(6, std::vector<int>{3,7}));
-    graph.insert(std::make_pair(7, std::vector<int>{4,6,8}));
-    graph.insert(std::make_pair(8, std::vector<int>{5,7}));
+    graph.insert(std::make_pair(7, std::vector<int>{6,4,8}));
+    graph.insert(std::make_pair(8, std::vector<int>{7,5}));
 }
 
 const std::vector<int>& Graph::getNeighbors(int index) const {
@@ -70,5 +70,14 @@ const std::vector<int>& Graph::getNeighbors(int index) const {
 
     return iter->second;
 }
+
+bool inClosedList(State& toCheck, std::vector<std::shared_ptr<Node>>& closedList) {
+    for (int i = 0; i < closedList.size(); i++) {
+        if (toCheck == closedList.at(i)->getState())
+            return true;
+    }
+    return false;
+}
+
 
 
