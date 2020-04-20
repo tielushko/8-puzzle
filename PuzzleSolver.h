@@ -11,7 +11,7 @@ struct step{
    int costToHere;
    long marker;
    vector<int> board;
-   vector<pair<step,long>>adjacency;
+   vector<pair<step,unsigned long>>adjacency;
 };
 
 struct edge{
@@ -31,28 +31,29 @@ class Graph{
       int marker;
       int whichAlgorithm;// 1=DFS 2=BFS 3=Dijkstra's
    public:
-      Graph();
-      void printBoard(step);//done
-      bool isSolved(step);//done
-      int findZero(step);//done
-      void swapPlaces(vector<int>&,int,int);//done
-      void makeMove(step&,int);//done
-      void moveLeft(step&,int);//done
-      void moveUp(step&,int);//done
-      void moveRight(step&,int);//done
-      void moveDown(step&,int);//done
-      void findMoves(step&);//done
-      bool alreadyGenerated(step);//done? not tested but should work
-      bool visited(step,vector<step>);//done? also not tested yet
+      Graph();//default constructor
+      void printBoard(step);//Prints the board of inputted step
+      bool isSolved(step);//Checks if step's noard matches the solution
+      int findZero(step);//Finds the empty space
+      void swapPlaces(vector<int>&,int,int);//switched the positions of elements on the board
+      void makeMove(step&,int);//takes a move and adds it to the graph
+      void moveLeft(step&,int);//checks if moving left is possible
+      void moveUp(step&,int);//checks if moving up is possible
+      void moveRight(step&,int);//checks if moving right is possible
+      void moveDown(step&,int);//checks if moving down is possible
+      void findMoves(step&);//finds and executes possible moves
+      bool alreadyGenerated(step);//checks if a board is already generated
+      bool visited(step,vector<step>);//checks if a board os part of the graph
       void DFS(vector<int>);
       void BFS(vector<int>);
       void DijkstrasAlg(vector<int>);
-      int getCost(){return cost;}//done
-      int getMarker(){return marker;}//done
+      int getCost(){return cost;}
+      int getMarker(){return marker;}
       int whichAlgo(){return whichAlgorithm;}
       void setAlgo(int);
-      int pathCost(step);
-      void tracePath(step);
+      int pathCost(step);//follows graph up to root to find cost to the step
+      void tracePath(step);//follows graph to root and prints steps our in order
+      int countDisplaced(step,int);//makes the heuristic for Dijksra's algorithm
 };
 
 #endif
