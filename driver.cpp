@@ -3,6 +3,7 @@
 #include <iomanip>
 using namespace std;
 
+
 int main(){    //0,1,2,4,5,3,8,7,6
    Graph graph;//1,2,3,8,0,4,7,6,5//sol
    step step;  //0,1,3,8,2,4,7,6,5

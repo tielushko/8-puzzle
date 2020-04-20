@@ -190,6 +190,54 @@ void Graph::BFS(vector<int> initBoard){//BFS algorithm
       findMoves(s);//generates and adds moves to stack and list
       for(unsigned int i = 0; i<s.adjacency.size();i++){
          if(!visited(s.adjacency.at(i).first,found)){
+            deque.push_front(s.adjacency.at(i).first);
+            //deque.emplace_back(s.adjacency.at(i).first);
+            found.push_back(s.adjacency.at(i).first);
+         }
+      }
+      if(isSolved(s)){
+         tracePath(s);
+         cout << "Solved" << endl;
+         printBoard(s);
+         cout << "TotalCost: " << pathCost(s) << endl;
+         break;
+      }
+   }
+}
+void Graph::BFS(vector<int> initBoard){
+   setAlgo(2);
+   deque <step> deque;
+   vector <step> found;
+   step init;
+   init.board = initBoard;
+   init.marker = 0;
+   cout << "Puzzle start." << endl;
+   printBoard(init);
+
+   if(isSolved(init)){
+      cout << "Puzzle is already solved" << endl;
+      return;
+   }
+   found.push_back(init);
+   currPath.push_back(init);
+   deque.emplace_front(init);
+   
+   while(!deque.empty()){
+      cout << "Iteration" << endl;
+      step s = deque.front();
+      deque.pop_front();
+      while(alreadyGenerated(s)){
+         s = deque.front();
+         deque.pop_front();
+      }
+      if(s.marker!=0){
+         currPath.push_back(s);
+         s.costToHere = currPath.size()-1;
+      }
+      findMoves(s);
+      for(unsigned int i = 0; i<s.adjacency.size();i++){
+         if(!visited(s.adjacency.at(i).first,found)){
+            //deque.push_front(s.adjacency.at(i).first);
             deque.emplace_back(s.adjacency.at(i).first);
             found.push_back(s.adjacency.at(i).first);
          }
@@ -202,6 +250,7 @@ void Graph::BFS(vector<int> initBoard){//BFS algorithm
          break;
       }
    }
+
 }
 void Graph::DijkstrasAlg(vector<int> initBoard){//Dijkstra's Algorithm
    setAlgo(3);
