@@ -1,9 +1,0 @@
-DONE:
-Implemented a State class with all the helper functions.
-Implemented a Graph class that is able to retrieve the neighboring tiles of any tile.
-
-TO-DO:
-Implement a node class that will be able to construct a tree for any particular state. With a pointer to its parent.
-(The idea behind it is that we start traversing the tree up until)
-
-Find a way to build the tree with all the nodes in it.
