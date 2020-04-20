@@ -1,17 +1,10 @@
-#include <iostream>
+#include "PuzzleSolver.h"
+using namespace std;
 
-#include "state.h"
-
-int main() {
-    State state(ROW_COL_COUNT);
-    
-    StateArray test = state.getArray();
-
-    for (int i = 0; i < test.size(); i++) {
-        if(i % 3 == 0) 
-            std::cout << "\n";
-            
-        std::cout << test.at(i) << " ";
-    }
-    return 0;
+int main(){
+   Graph graph;
+   step step;
+   step.board = {1,2,3,4,5,6,7,8,0};
+   graph.BFS(step.board);
+   return 0;
 }
