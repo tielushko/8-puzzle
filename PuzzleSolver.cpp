@@ -101,12 +101,13 @@ bool Graph::visited(step curr, vector<step> searched){
             return true;
       return false;
       }
-   } else{
+   } else {
       for(step s : searched)
          if(curr.marker == s.marker)
             return true;
       return false;
    }
+   return false;
 }
 
 void Graph::setAlgo(int alg){//set which algorithm is being used
